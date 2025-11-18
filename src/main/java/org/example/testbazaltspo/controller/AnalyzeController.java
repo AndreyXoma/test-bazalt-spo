@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 
@@ -31,10 +32,29 @@ public class AnalyzeController {
     public String comparison(@RequestParam String directory1,
                              @RequestParam String directory2,
                              Model model) throws IOException {
-        directoryComparison.comparison(Path.of(directory1), Path.of(directory2));
+
+        Path dir1 = Path.of(directory1);
+        Path dir2 = Path.of(directory2);
+
+        if(!Files.exists(dir1) || !Files.isDirectory(dir1)) {
+            model.addAttribute("error", "Directory 1 doesn't exist or is not a directory");
+            return "index";
+        }
+
+        if(!Files.exists(dir2) || !Files.isDirectory(dir2)) {
+            model.addAttribute("error", "Directory 2 doesn't exist or is not a directory");
+            return "index";
+        }
+
+        directoryComparison.comparison(dir1, dir2);
 
         Collection<FileInfo> results = directoryComparison.getResults();
         model.addAttribute("results", results);
+
+        if(results.isEmpty()) {
+            model.addAttribute("message", "No damaged files found");
+        }
+
         return "index";
     }
 
