@@ -2,6 +2,7 @@ package org.example.testbazaltspo.api;
 
 import org.example.testbazaltspo.model.FileInfo;
 import org.example.testbazaltspo.service.DirectoryComparison;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -16,12 +17,6 @@ public class ComparisonController {
 
     public ComparisonController(DirectoryComparison directoryComparison) {
         this.directoryComparison = directoryComparison;
-    }
-
-    @PostMapping("/comparison")
-    public String comparison(@RequestParam String directory1, @RequestParam String directory2) throws IOException {
-        directoryComparison.comparison(Path.of(directory1), Path.of(directory2));
-        return "Comparison started";
     }
 
     @GetMapping("/results")
