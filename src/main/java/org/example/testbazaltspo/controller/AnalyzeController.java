@@ -65,6 +65,6 @@ public class AnalyzeController {
             return "file-not-found";
         }
         model.addAttribute("fileInfo", info);
-        return "file-datails";
+        return "file-details";
     }
 }
