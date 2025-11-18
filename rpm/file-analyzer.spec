@@ -4,26 +4,26 @@ Release:        1%{?dist}
 Summary:        File Analyzer Web Service
 
 License:        MIT
-URL:            https://github.com/AndreyXoma/test-bazalt-spo.git
-BuildRequires:  java-17-openjdk maven
-Requires:       java-17-openjdk
+URL:            http://example.com
+
+BuildArch:      noarch
 
 %description
-Web service for analyzing corrupted files between two directories.
+Web service for analyzing damaged files.
 
 %prep
-# No source preparation needed
+# ничего не делаем, JAR уже готов
 
 %build
-# No build, jar already built via Maven
+# ничего не строим, JAR уже собран
 
 %install
-mkdir -p %{buildroot}/opt/%{name}
-cp /src/target/test-bazalt-spo-0.0.1-SNAPSHOT.jar %{buildroot}/opt/%{name}/
+mkdir -p %{buildroot}/opt/file-analyzer
+cp /opt/file-analyzer/test-bazalt-spo-0.0.1-SNAPSHOT.jar %{buildroot}/opt/file-analyzer/
 
 %files
-/opt/%{name}/test-bazalt-spo-0.0.1-SNAPSHOT.jar
+/opt/file-analyzer/test-bazalt-spo-0.0.1-SNAPSHOT.jar
 
 %changelog
-* Tue Nov 18 2025 Андрей Хомяков <ahomakov89@gmail.com> - 1.0.0-1
-- Initial RPM package with pre-built jar
+* Wed Nov 18 2025 Андрей Хомяков <ahomakov89@gmail.com> - 1.0.0-1
+- Initial RPM release
