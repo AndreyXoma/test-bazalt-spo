@@ -30,6 +30,9 @@
             <td th:text="${file.filePath}"></td>
             <td th:text="${file.fileSize}"></td>
             <td th:text="${file.damageOffsets.size()}"></td>
+            <td>
+                <a th:href="@{'/file/' + ${file.filePath}}" target="_blank">View</a>
+            </td>
         </tr>
     </table>
 </div>
