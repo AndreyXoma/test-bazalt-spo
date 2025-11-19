@@ -38,10 +38,12 @@ public class AnalyzeController {
         Path dir2 = Path.of(directory2);
 
         if (!Files.exists(dir1) || !Files.isDirectory(dir1)) {
-            throw new NotFoundException("Directory 1 does not exist or is not a directory: " + directory1);
+            model.addAttribute("message", "Directory 1 does not exist: " + directory1);
+            return "file-not-found";
         }
         if (!Files.exists(dir2) || !Files.isDirectory(dir2)) {
-            throw new NotFoundException("Directory 2 does not exist or is not a directory: " + directory2);
+            model.addAttribute("message", "Directory 2 does not exist: " + directory2);
+            return "file-not-found";
         }
 
         directoryComparison.comparison(dir1, dir2);

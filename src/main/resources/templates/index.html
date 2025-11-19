@@ -48,7 +48,7 @@
             <td th:text="${file.fileSize}"></td>
             <td th:text="${file.damageOffsets.size()}"></td>
             <td>
-                <a th:href="@{'/file/' + ${file.relativePath}}" target="_blank" class="btn btn-sm btn-info">View</a>
+                <a th:href="@{'/file/' + ${file.fileName}}" target="_blank" class="btn btn-sm btn-info">View</a>
             </td>
         </tr>
         </tbody>

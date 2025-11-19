@@ -37,8 +37,13 @@ public class DirectoryComparison {
                 ComparisonResult result = fileCompareService.compareFiles(path1, path2);
 
                 if (!result.isResult()) {
-                    FileInfo info = new FileInfo(path1, directory1, result.getDamageOffsets());
-                    lastResults.put(info.getRelativePath(), info);
+                    Path relativePath1 = directory1.relativize(path1);
+                    FileInfo info = new FileInfo(
+                            path1,
+                            Files.size(path1),
+                            result.getDamageOffsets()
+                    );
+                    lastResults.put(relativePath1.toString(), info);
                 }
             } catch (Exception ignored) {}
         });

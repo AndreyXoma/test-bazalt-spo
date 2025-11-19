@@ -27,6 +27,12 @@
 <body class="container mt-5">
 
 <a href="/" class="btn btn-secondary mb-3">Back</a>
+<br>
+<br>
+<a class="btn btn-primary mt-3"
+   th:href="@{'/download/' + ${fileInfo.fileName}}">
+    Download File
+</a>
 
 <h2 th:text="${fileInfo.absolutePath}">File</h2>
 
@@ -62,11 +68,6 @@
 </div>
 
 <hr/>
-
-<a class="btn btn-primary mt-3"
-   th:href="@{'/download/' + ${fileInfo.relativePath}}">
-    Download File
-</a>
 
 </body>
 </html>

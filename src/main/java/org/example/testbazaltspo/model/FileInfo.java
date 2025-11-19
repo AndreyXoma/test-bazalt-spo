@@ -8,14 +8,14 @@ import java.util.List;
 public class FileInfo {
 
     private Path absolutePath;   // полный путь для скачивания
-    private String relativePath; // для отображения в UI
+    private String fileName;
     private long fileSize;
     private List<Integer> damageOffsets;
 
-    public FileInfo(Path absolutePath, Path baseDir, List<Integer> damageOffsets) throws IOException {
-        this.absolutePath = absolutePath;
-        this.relativePath = baseDir.relativize(absolutePath).toString();
-        this.fileSize = Files.size(absolutePath);
+    public FileInfo(Path path, long fileSize, List<Integer> damageOffsets) {
+        this.absolutePath = path;
+        this.fileName = path.getFileName().toString();
+        this.fileSize = fileSize;
         this.damageOffsets = damageOffsets;
     }
 
@@ -23,8 +23,8 @@ public class FileInfo {
         return absolutePath;
     }
 
-    public String getRelativePath() {
-        return relativePath;
+    public String getFileName() {
+        return fileName;
     }
 
     public long getFileSize() {
