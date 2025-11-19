@@ -1,8 +1,5 @@
 README.md
 target/
-*.rpm
-*.src.rpm
-*.jar
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -21,6 +18,10 @@ target/
 *.iws
 *.iml
 *.ipr
+
+### RPMs ###
+*.rpm
+*.src.rpm
 
 ### NetBeans ###
 /nbproject/private/
