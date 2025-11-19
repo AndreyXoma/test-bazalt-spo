@@ -5,7 +5,7 @@ Summary:        Web service for analyzing damaged files
 
 License:        MIT
 URL:            https://github.com/AndreyXoma/test-bazalt-spo
-Source0:        %{name}-%{version}.tar
+Source0:        %{name}-%{version}.tar.gz
 
 BuildRequires:  maven
 BuildRequires:  java-17-openjdk-devel

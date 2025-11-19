@@ -6,7 +6,7 @@ echo "=== File Analyzer Test Environment ==="
 
 # -------- 1. Проверяем, что file_scrumbler.py существует --------
 
-if [ ! -f "./scripts/file_scrumbler.py" ]; then
+if [ ! -f "file_scrumbler.py" ]; then
   echo "ERROR: file_scrumbler.py not found in current directory!"
   exit 1
 fi
@@ -45,7 +45,7 @@ echo "Copy complete."
 # -------- 5. Применяем file_scrumbler.py к DAMAGED --------
 
 echo "Scrambling files in DAMAGED directory..."
-python3 ./scripts/file_scrumbler.py "$DAMAGED" \
+python3 file_scrumbler.py "$DAMAGED" \
   --percent 1 \
   --byte-percent 0.5 \
   --mode replace \
