@@ -58,9 +58,9 @@ public class AnalyzeController {
         return "index";
     }
 
-    @GetMapping("/file/{file}")
-    public String viewFile(@PathVariable String file, Model model) {
-        FileInfo info = directoryComparison.getFileResult(file);
+    @GetMapping("/file/{fileName}")
+    public String viewFile(@PathVariable String fileName, Model model) {
+        FileInfo info = directoryComparison.getFileResult(fileName);
         if (info == null) {
             model.addAttribute("message", "No file found");
             return "file-not-found";

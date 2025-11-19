@@ -20,7 +20,6 @@ public class FileCompareService {
 
         for(int i = 0; i < min; i++) {
             if(buffer1[i] != buffer2[i]) {
-                System.out.println("Byte difference at " + i + ": " + buffer1[i] + " != " + buffer2[i]);
                 result.addDamageOffset(i);
             }
         }

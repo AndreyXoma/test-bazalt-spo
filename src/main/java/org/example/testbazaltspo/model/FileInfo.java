@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FileInfo {
 
-    private Path absolutePath;   // полный путь для скачивания
+    private Path absolutePath;
     private String fileName;
     private long fileSize;
     private List<Integer> damageOffsets;
