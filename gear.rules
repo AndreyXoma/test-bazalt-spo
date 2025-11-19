@@ -1,0 +1,7 @@
+tar: .
+copy:
+  - pom.xml
+  - src
+  - ./scripts/file_scrumbler.py
+  - README.md
+spec: ./rpm/file-analyzer.spec
