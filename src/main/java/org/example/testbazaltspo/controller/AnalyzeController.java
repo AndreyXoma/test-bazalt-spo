@@ -1,5 +1,6 @@
 package org.example.testbazaltspo.controller;
 
+import org.example.testbazaltspo.exception.NotFoundException;
 import org.example.testbazaltspo.model.FileInfo;
 import org.example.testbazaltspo.service.DirectoryComparison;
 import org.springframework.stereotype.Controller;
@@ -36,14 +37,11 @@ public class AnalyzeController {
         Path dir1 = Path.of(directory1);
         Path dir2 = Path.of(directory2);
 
-        if(!Files.exists(dir1) || !Files.isDirectory(dir1)) {
-            model.addAttribute("error", "Directory 1 doesn't exist or is not a directory");
-            return "index";
+        if (!Files.exists(dir1) || !Files.isDirectory(dir1)) {
+            throw new NotFoundException("Directory 1 does not exist or is not a directory: " + directory1);
         }
-
-        if(!Files.exists(dir2) || !Files.isDirectory(dir2)) {
-            model.addAttribute("error", "Directory 2 doesn't exist or is not a directory");
-            return "index";
+        if (!Files.exists(dir2) || !Files.isDirectory(dir2)) {
+            throw new NotFoundException("Directory 2 does not exist or is not a directory: " + directory2);
         }
 
         directoryComparison.comparison(dir1, dir2);
@@ -62,6 +60,7 @@ public class AnalyzeController {
     public String viewFile(@PathVariable String file, Model model) {
         FileInfo info = directoryComparison.getFileResult(file);
         if (info == null) {
+            model.addAttribute("message", "No file found");
             return "file-not-found";
         }
         model.addAttribute("fileInfo", info);

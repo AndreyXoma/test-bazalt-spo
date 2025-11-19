@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>File Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
-<body>
-<h1 th:text="'File: ' + ${fileInfo.filePath}"></h1>
-<p>Size: <span th:text="${fileInfo.fileSize}"></span> bytes</p>
-<p>Damage Bytes:</p>
+<body class="container mt-5">
+<a href="/" class="btn btn-sm btn-secondary mb-3">Back</a>
+
+<h1 th:text="${fileInfo.filePath}">File</h1>
+<p>Size: <span th:text="${fileInfo.fileSize}">0</span> bytes</p>
+
+<h3>Damaged offsets (<span th:text="${fileInfo.damageOffsets.size()}">0</span>)</h3>
 <ul>
-    <li th:each="offset : ${fileInfo.damageOffsets}" th:text="${offset}"></li>
+    <li th:each="o : ${fileInfo.damageOffsets}" th:text="${o}">0</li>
 </ul>
 
-<a href="/" style="margin-top: 20px; display: block;">Back</a>
+<div th:if="${fileInfo.damageOffsets.isEmpty()}">
+    <div class="alert alert-success">No damaged offsets detected</div>
+</div>
 </body>
 </html>
