@@ -19,11 +19,11 @@ Web service for analyzing damaged files.
 
 %install
 mkdir -p %{buildroot}/opt/file-analyzer
-cp /opt/file-analyzer/test-bazalt-spo-0.0.1-SNAPSHOT.jar %{buildroot}/opt/file-analyzer/
+cp %{_sourcedir}/test-bazalt-spo-0.0.1-SNAPSHOT.jar %{buildroot}/opt/file-analyzer/
 
 %files
 /opt/file-analyzer/test-bazalt-spo-0.0.1-SNAPSHOT.jar
 
 %changelog
-* Wed Nov 18 2025 Андрей Хомяков <ahomakov89@gmail.com> - 1.0.0-1
+* Wed Nov 18 2025 Andrey Khomyakov <ahomakov89@gmail.com> - 1.0.0-1
 - Initial RPM release
