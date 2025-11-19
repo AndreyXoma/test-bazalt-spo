@@ -44,11 +44,11 @@
         </thead>
         <tbody>
         <tr th:each="file : ${results}">
-            <td th:text="${file.filePath}"></td>
+            <td th:text="${file.absolutePath}"></td>
             <td th:text="${file.fileSize}"></td>
             <td th:text="${file.damageOffsets.size()}"></td>
             <td>
-                <a th:href="@{'/file/' + ${file.filePath}}" target="_blank" class="btn btn-sm btn-info">View</a>
+                <a th:href="@{'/file/' + ${file.relativePath}}" target="_blank" class="btn btn-sm btn-info">View</a>
             </td>
         </tr>
         </tbody>

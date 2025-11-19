@@ -27,34 +27,20 @@ public class DirectoryComparison {
 
         Files.walk(directory1).forEach(path1 -> {
             try {
-                if(Files.isDirectory(path1)) {
-                    return;
-                }
+                if (Files.isDirectory(path1)) return;
 
-                Path relativePath1 = directory1.relativize(path1);
-                Path path2 = directory2.resolve(relativePath1);
+                Path relativePath = directory1.relativize(path1);
+                Path path2 = directory2.resolve(relativePath);
 
-                if(!Files.exists(path2)) {
-                    return;
-                }
+                if (!Files.exists(path2)) return;
 
                 ComparisonResult result = fileCompareService.compareFiles(path1, path2);
 
-                if(!result.isResult()) {
-                    System.out.println("Found difference in: " + relativePath1);
-                    FileInfo info = new FileInfo(
-                            relativePath1.toString(),
-                            Files.size(path1),
-                            result.getDamageOffsets()
-
-                    );
-                    lastResults.put(relativePath1.toString(), info);
-                } else {
-                    System.out.println("No difference in: " + relativePath1);
+                if (!result.isResult()) {
+                    FileInfo info = new FileInfo(path1, directory1, result.getDamageOffsets());
+                    lastResults.put(info.getRelativePath(), info);
                 }
-            } catch (Exception ignored) {
-
-            }
+            } catch (Exception ignored) {}
         });
     }
 
@@ -62,7 +48,7 @@ public class DirectoryComparison {
         return lastResults.values();
     }
 
-    public FileInfo getFileResult(String name) {
-        return lastResults.get(name);
+    public FileInfo getFileResult(String relativePath) {
+        return lastResults.get(relativePath);
     }
 }

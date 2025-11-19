@@ -4,20 +4,69 @@
     <meta charset="UTF-8"/>
     <title>File Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <style>
+        .file-map {
+            display: flex;
+            flex-wrap: wrap;
+            width: 400px;
+            border: 1px solid #ccc;
+            padding: 3px;
+        }
+        .block {
+            width: 10px;
+            height: 10px;
+            margin: 1px;
+            background-color: #4caf50; /* OK */
+        }
+        .block.bad {
+            background-color: #dc3545; /* damaged */
+        }
+    </style>
 </head>
 <body class="container mt-5">
-<a href="/" class="btn btn-sm btn-secondary mb-3">Back</a>
 
-<h1 th:text="${fileInfo.filePath}">File</h1>
-<p>Size: <span th:text="${fileInfo.fileSize}">0</span> bytes</p>
+<a href="/" class="btn btn-secondary mb-3">Back</a>
+
+<h2 th:text="${fileInfo.absolutePath}">File</h2>
+
+<p><strong>Size:</strong> <span th:text="${fileInfo.fileSize}">0</span> bytes</p>
+
+<hr/>
 
 <h3>Damaged offsets (<span th:text="${fileInfo.damageOffsets.size()}">0</span>)</h3>
-<ul>
-    <li th:each="o : ${fileInfo.damageOffsets}" th:text="${o}">0</li>
-</ul>
 
 <div th:if="${fileInfo.damageOffsets.isEmpty()}">
     <div class="alert alert-success">No damaged offsets detected</div>
 </div>
+
+<div th:unless="${fileInfo.damageOffsets.isEmpty()}">
+    <ul class="list-group mb-3">
+        <li class="list-group-item" th:each="o : ${fileInfo.damageOffsets}">
+            Offset: <span th:text="${o}">0</span>
+        </li>
+    </ul>
+</div>
+
+<hr/>
+
+<h3>File Map</h3>
+<p class="text-muted">Красные блоки — поврежденные смещения</p>
+
+<div class="file-map"
+     th:with="total=${fileInfo.fileSize},
+              damaged=${fileInfo.damageOffsets}">
+    <div th:each="i : ${#numbers.sequence(0, total-1)}"
+         th:class="'block ' + (${damaged.contains(i)} ? 'bad' : '')">
+    </div>
+</div>
+
+<hr/>
+
+<a class="btn btn-primary mt-3"
+   th:href="@{'/download/' + ${fileInfo.relativePath}}">
+    Download File
+</a>
+
 </body>
 </html>
