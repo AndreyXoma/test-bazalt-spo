@@ -16,7 +16,7 @@ Web service for comparing two directories, finding damaged files,
 and displaying differences through REST API and web interface.
 
 %prep
-%setup -q
+%setup -q -n file-analyzer-1.0.0
 
 %build
 mvn -DskipTests package
@@ -34,7 +34,7 @@ install -D -m 0755 file_scrumbler.py %{buildroot}/usr/bin/file_scrumbler
 %files
 %doc README.md
 /usr/share/%{name}
-/usr/bin/file_scrumbler
+/usr/bin/file_scrumbler.py
 
 
 %changelog
